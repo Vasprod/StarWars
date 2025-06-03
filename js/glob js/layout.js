@@ -5,7 +5,7 @@ const episodeBackgrounds = {
   4: '/img/episode4.jpg',
   5: '/img/episode5.jpg',
   6: '/img/episode6.jpg'
-};
+}
 
 export function createLayout(episodeId, title, episodeNumber, blockCard) {
   const card = document.createElement("div")

@@ -90,7 +90,7 @@ button {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 710px;
+    height: 100dvh;
     margin-bottom: 100px;
     background-image: url(/img/image\ 244.jpg);
     background-repeat: no-repeat;
