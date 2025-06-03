@@ -1,4 +1,4 @@
-const episodeBackgrounds = {
+export const episodeBackgrounds = {
   1: '/img/episode1.jpg',
   2: '/img/episode2.jpg',
   3: '/img/episode3.jpg',
