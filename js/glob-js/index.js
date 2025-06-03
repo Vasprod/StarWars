@@ -10,11 +10,11 @@ container.appendChild(blockCard)
 
 fetch('https://www.swapi.tech/api/films')
   .then(res => res.json())
-  .then(data => {
-    loader.classList.add('hidden')         // Скрываем лоадер
-    container.classList.remove('hidden')   // Показываем контент
-
+  .then(data => {    
     const films = data.result
+
+    // Показываем контейнер
+    container.classList.remove('hidden');
 
     // Сортируем эпизоды по порядку
     films.sort((a, b) => a.properties.episode_id - b.properties.episode_id)

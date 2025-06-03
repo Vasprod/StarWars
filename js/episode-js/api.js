@@ -1,4 +1,4 @@
-import { createPageEpisode } from './episode-layout.js';
+import { createPageEpisode, createAccordions } from './episode-layout.js';
 
 const params = new URLSearchParams(window.location.search)
 const episodeId = params.get('id')
@@ -14,5 +14,6 @@ fetch(`https://www.swapi.tech/api/films/${episodeId}`)
       film.producer, 
       film.opening_crawl,
       episodeId)
+    createAccordions()
   })
   .catch(err => console.error('Ошибка загрузки данных:', err))

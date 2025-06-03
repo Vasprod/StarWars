@@ -70,9 +70,9 @@ a {
 }
 
 body {
-    max-width: 1920px;
     margin: 0 auto;
     background-color: var(--back-color);
+    font-family: 'Helvetica Neue';
 }
 
 button {
@@ -82,4 +82,35 @@ button {
   margin: 0;
   color: inherit;
   cursor: pointer;
+}
+
+.back-container {
+  width: 100%;
+  height: 100dvh;
+  
+}
+
+.block-film {
+  width: 40%;
+  padding: 100px 80px;
+}
+
+.title {
+  color: var(--default-color);
+}
+
+.list {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item-list {
+  color: var(--default-color);
+}
+
+.p-film {
+  color: var(--default-color);
 }

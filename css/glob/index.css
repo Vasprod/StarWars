@@ -154,6 +154,10 @@ button {
   background-position: top;
 }
 
+.hidden {
+  display: none;
+}
+
 .title_info {
   width: 40%;
   font-family: 'SFDistantGalaxy';
