@@ -1,8 +1,18 @@
 import { episodeBackgrounds } from "../glob-js/layout.js";
 
-const container = document.getElementById("container");
+const customDescriptions = {
+  "1": "Turmoil has engulfed the Galactic Republic. While noble Jedi Knights strive to maintain peace, a dark menace stirs in the shadows. Young Anakin Skywalker is discovered, destined for greatness but clouded by uncertainty. As war brews, sinister forces begin to reveal themselves.",
+  "2": "Ten years have passed since the invasion of Naboo. The galaxy stands on the brink of civil war, and forbidden love blooms between Anakin and Padmé. Meanwhile, mysterious armies are assembled in secret. The Clone Wars are about to begin.",
+  "3": "The Clone Wars rage across the galaxy. Anakin Skywalker faces impossible choices as his loyalty is torn between the Jedi and Chancellor Palpatine. Darkness takes hold as the Republic crumbles from within. A new Empire rises, and Darth Vader is born.",
+  "4": "The galaxy suffers under the grip of the Empire. A young farm boy named Luke Skywalker dreams of adventure and discovers his destiny. With new allies, he joins the Rebellion to fight tyranny. Hope is ignited across the stars.",
+  "5": "Despite recent victories, the Rebellion is relentlessly pursued by the Empire. Luke seeks guidance from Jedi Master Yoda while Han, Leia, and the others flee danger. Darth Vader closes in with a chilling revelation. The battle between light and dark grows ever more intense.",
+  "6": "The final battle has begun. The Rebels prepare to strike the Empire’s ultimate weapon while Luke confronts his father in a desperate bid for redemption. Old allies return, and destinies are fulfilled. The light rises as the dark falls — peace may yet be restored.",
+};
+
+const container = document.getElementById('container')
 
 export function createPageEpisode(
+  container,
   title,
   release_date,
   director,
@@ -10,13 +20,15 @@ export function createPageEpisode(
   opening_crawl,
   episodeId
 ) {
-  container.classList.add("card");
   container.style.backgroundImage =
     "linear-gradient(90deg, rgb(0, 0, 0) 20%, transparent), url('" +
     episodeBackgrounds[episodeId] +
     "')";
   container.style.backgroundSize = "cover";
   container.style.backgroundPosition = "center";
+
+  const blockLay = document.createElement('div')
+  blockLay.classList.add('content')
 
   const blockFilm = document.createElement("div");
   blockFilm.classList.add("block-film");
@@ -28,7 +40,8 @@ export function createPageEpisode(
   const infoFilm = document.createElement("ul");
   infoFilm.classList.add("list");
   const releaseDate = document.createElement("li");
-  releaseDate.textContent = release_date;
+  const [year, month, day] = release_date.split("-");
+  releaseDate.textContent = `${day}.${month}.${year}`;
   releaseDate.classList.add("item-list");
   const directorFilm = document.createElement("li");
   directorFilm.textContent = director;
@@ -40,38 +53,23 @@ export function createPageEpisode(
   infoFilm.append(releaseDate, directorFilm, producerFilm);
 
   const descrFilm = document.createElement("p");
-  descrFilm.textContent = opening_crawl;
+  descrFilm.textContent = customDescriptions[episodeId] || opening_crawl;
   descrFilm.classList.add("p-film");
 
   blockFilm.append(nameFilm, infoFilm, descrFilm);
-  container.appendChild(blockFilm);
+  blockLay.appendChild(blockFilm)
+  container.appendChild(blockLay);
 }
 
-export async function createAccordions() {
+export async function createAccordions(planetsUrls, speciesUrls) {
+  const blockLay = document.querySelector('.content')
   const blockAccord = document.createElement("div");
   blockAccord.classList.add("block-acc");
 
-  const planetsBlock = document.createElement("div");
-  planetsBlock.classList.add("accordion-block");
+  const planetsAccordion = await createAccordion("Planets", planetsUrls);
+  const speciesAccordion = await createAccordion("Species", speciesUrls);
 
-  const planetsTitle = document.createElement("h2");
-  planetsTitle.textContent = "Planets";
-
-  const planetsList = await createAccordionList(planetsUrls);
-
-  planetsBlock.append(planetsTitle, planetsList);
-  blockAccord.appendChild(planetsBlock);
-
-  const speciesBlock = document.createElement("div");
-  speciesBlock.classList.add("accordion-block");
-
-  const speciesTitle = document.createElement("h2");
-  speciesTitle.textContent = "Species";
-
-  const speciesList = await createAccordionList(speciesUrls);
-
-  speciesBlock.append(speciesTitle, speciesList);
-  blockAccord.appendChild(speciesBlock);
+  blockAccord.append(planetsAccordion, speciesAccordion);
 
   const btnMain = document.createElement("button");
   btnMain.textContent = "Home";
@@ -79,7 +77,62 @@ export async function createAccordions() {
   btnMain.addEventListener("click", () => {
     window.location.href = `index.html`;
   });
-  blockAccord.appendChild(btnMain);
 
-  container.appendChild(blockAccord);
+  blockLay.appendChild(blockAccord);
+  blockLay.appendChild(btnMain);
+}
+
+export async function createAccordion(title, urls) {
+  const accordion = document.createElement("div");
+  accordion.classList.add("accordion");
+
+  const header = document.createElement("div");
+  header.classList.add("accordion-header");
+
+  const heading = document.createElement("h2");
+  heading.classList.add('title-acc')
+  heading.textContent = title;
+
+  const toggleBtn = document.createElement("button");
+  toggleBtn.classList.add("accordion-toggle");
+  toggleBtn.innerHTML = `
+  <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 7L12 17L2 7ZM22 7L18 11L22 7ZM15 14L12 17L15 14Z" fill="white" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  `;
+
+  const list = document.createElement("ul");
+  list.classList.add("accordion-list");
+  list.style.display = "none";
+
+  toggleBtn.addEventListener("click", () => {
+    const isVisible = list.style.display === "flex";
+    list.style.display = isVisible ? "none" : "flex";
+    
+    accordion.classList.toggle("open");
+  });
+
+  header.append(heading, toggleBtn);
+  accordion.append(header, list);
+
+  try {
+    const responses = await Promise.all(
+      urls.map((url) => fetch(url).then((res) => res.json()))
+    );
+
+    responses.forEach((data) => {
+      const itemAcc = document.createElement("li");
+      itemAcc.textContent = data.result.properties.name || "Без имени";
+      itemAcc.classList.add('item-acc')
+      list.appendChild(itemAcc);
+    });
+  } catch (error) {
+    console.error("Ошибка загрузки данных:", error);
+    const errorItem = document.createElement("li");
+    errorItem.textContent = "Ошибка загрузки";
+    list.appendChild(errorItem);
+  }
+
+  accordion.append(header, list);
+  return accordion;
 }

@@ -28,18 +28,16 @@ export function createLayout(episodeId, title, episodeNumber, blockCard) {
   numbCard.classList.add('card_descr')
   numbCard.textContent = `Episode ${episodeNumber}`
 
-  const btn = document.createElement("button")
-  btn.classList.add('btn')
-  btn.textContent = 'Details'
-  btn.addEventListener('click', () => {
-  window.location.href = `episode.html?id=${episodeId}`
-  })
+  const link = document.createElement("a")
+  link.classList.add('btn')
+  link.textContent = 'Details'
+  link.href = `episode.html?id=${episodeId}`
   
   card.appendChild(backImgCard)
   card.appendChild(backgroundCard)
   backgroundCard.appendChild(titleCard)
   backgroundCard.appendChild(numbCard)
-  backgroundCard.appendChild(btn)
+  backgroundCard.appendChild(link)
 
   blockCard.appendChild(card)
 }

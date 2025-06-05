@@ -1,31 +1,28 @@
-import { createLayout } from './layout.js'
-import { generateSparks } from './state.js';
+import { createLayout } from "./layout.js";
+import { generateSparks } from "./state.js";
 
-const loader = document.getElementById('loader')
-const container = document.getElementById('container-info')
+const loader = document.getElementById("loader");
+const container = document.getElementById("container-info");
 
-const blockCard = document.createElement('div')
-blockCard.classList.add('block_card')
-container.appendChild(blockCard)
+const blockCard = document.createElement("div");
+blockCard.classList.add("block_card");
+container.appendChild(blockCard);
 
-fetch('https://www.swapi.tech/api/films')
-  .then(res => res.json())
-  .then(data => {    
-    const films = data.result
+fetch("https://www.swapi.tech/api/films")
+  .then((res) => res.json())
+  .then((data) => {
+    const films = data.result;
+    container.classList.remove("hidden");
 
-    // Показываем контейнер
-    container.classList.remove('hidden');
+    films.sort((a, b) => a.properties.episode_id - b.properties.episode_id);
 
-    // Сортируем эпизоды по порядку
-    films.sort((a, b) => a.properties.episode_id - b.properties.episode_id)
-
-    films.forEach(film => {
-      const props = film.properties
-      createLayout(props.episode_id, props.title, props.episode_id, blockCard)
-    })
+    films.forEach((film) => {
+      const props = film.properties;
+      createLayout(props.episode_id, props.title, props.episode_id, blockCard);
+    });
   })
-  .catch(err => console.error('Ошибка загрузки данных:', err))
+  .catch((err) => console.error("Ошибка загрузки данных:", err));
 
-  document.addEventListener('DOMContentLoaded', () => {
-    generateSparks()
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  generateSparks();
+});
