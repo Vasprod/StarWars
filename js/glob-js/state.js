@@ -1,6 +1,8 @@
 export function generateSparks(count = 40) {
   const container = document.querySelector('.spark-container');
 
+  container.innerHTML = "";
+
   for (let i = 0; i < count; i++) {
     const spark = document.createElement('div');
     spark.classList.add('spark');

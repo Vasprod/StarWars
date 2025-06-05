@@ -1,15 +1,15 @@
 import { episodeBackgrounds } from "../glob-js/layout.js";
 
 const customDescriptions = {
-  "1": "Turmoil has engulfed the Galactic Republic. While noble Jedi Knights strive to maintain peace, a dark menace stirs in the shadows. Young Anakin Skywalker is discovered, destined for greatness but clouded by uncertainty. As war brews, sinister forces begin to reveal themselves.",
-  "2": "Ten years have passed since the invasion of Naboo. The galaxy stands on the brink of civil war, and forbidden love blooms between Anakin and Padmé. Meanwhile, mysterious armies are assembled in secret. The Clone Wars are about to begin.",
-  "3": "The Clone Wars rage across the galaxy. Anakin Skywalker faces impossible choices as his loyalty is torn between the Jedi and Chancellor Palpatine. Darkness takes hold as the Republic crumbles from within. A new Empire rises, and Darth Vader is born.",
-  "4": "The galaxy suffers under the grip of the Empire. A young farm boy named Luke Skywalker dreams of adventure and discovers his destiny. With new allies, he joins the Rebellion to fight tyranny. Hope is ignited across the stars.",
-  "5": "Despite recent victories, the Rebellion is relentlessly pursued by the Empire. Luke seeks guidance from Jedi Master Yoda while Han, Leia, and the others flee danger. Darth Vader closes in with a chilling revelation. The battle between light and dark grows ever more intense.",
-  "6": "The final battle has begun. The Rebels prepare to strike the Empire’s ultimate weapon while Luke confronts his father in a desperate bid for redemption. Old allies return, and destinies are fulfilled. The light rises as the dark falls — peace may yet be restored.",
+  1: "Turmoil has engulfed the Galactic Republic. While noble Jedi Knights strive to maintain peace, a dark menace stirs in the shadows. Young Anakin Skywalker is discovered, destined for greatness but clouded by uncertainty. As war brews, sinister forces begin to reveal themselves.",
+  2: "Ten years have passed since the invasion of Naboo. The galaxy stands on the brink of civil war, and forbidden love blooms between Anakin and Padmé. Meanwhile, mysterious armies are assembled in secret. The Clone Wars are about to begin.",
+  3: "The Clone Wars rage across the galaxy. Anakin Skywalker faces impossible choices as his loyalty is torn between the Jedi and Chancellor Palpatine. Darkness takes hold as the Republic crumbles from within. A new Empire rises, and Darth Vader is born.",
+  4: "The galaxy suffers under the grip of the Empire. A young farm boy named Luke Skywalker dreams of adventure and discovers his destiny. With new allies, he joins the Rebellion to fight tyranny. Hope is ignited across the stars.",
+  5: "Despite recent victories, the Rebellion is relentlessly pursued by the Empire. Luke seeks guidance from Jedi Master Yoda while Han, Leia, and the others flee danger. Darth Vader closes in with a chilling revelation. The battle between light and dark grows ever more intense.",
+  6: "The final battle has begun. The Rebels prepare to strike the Empire’s ultimate weapon while Luke confronts his father in a desperate bid for redemption. Old allies return, and destinies are fulfilled. The light rises as the dark falls — peace may yet be restored.",
 };
 
-const container = document.getElementById('container')
+const container = document.getElementById("container");
 
 export function createPageEpisode(
   container,
@@ -27,8 +27,8 @@ export function createPageEpisode(
   container.style.backgroundSize = "cover";
   container.style.backgroundPosition = "center";
 
-  const blockLay = document.createElement('div')
-  blockLay.classList.add('content')
+  const blockLay = document.createElement("div");
+  blockLay.classList.add("content");
 
   const blockFilm = document.createElement("div");
   blockFilm.classList.add("block-film");
@@ -57,12 +57,12 @@ export function createPageEpisode(
   descrFilm.classList.add("p-film");
 
   blockFilm.append(nameFilm, infoFilm, descrFilm);
-  blockLay.appendChild(blockFilm)
+  blockLay.appendChild(blockFilm);
   container.appendChild(blockLay);
 }
 
 export async function createAccordions(planetsUrls, speciesUrls) {
-  const blockLay = document.querySelector('.content')
+  const blockLay = document.querySelector(".content");
   const blockAccord = document.createElement("div");
   blockAccord.classList.add("block-acc");
 
@@ -90,7 +90,7 @@ export async function createAccordion(title, urls) {
   header.classList.add("accordion-header");
 
   const heading = document.createElement("h2");
-  heading.classList.add('title-acc')
+  heading.classList.add("title-acc");
   heading.textContent = title;
 
   const toggleBtn = document.createElement("button");
@@ -105,34 +105,38 @@ export async function createAccordion(title, urls) {
   list.classList.add("accordion-list");
   list.style.display = "none";
 
-  toggleBtn.addEventListener("click", () => {
+  let isLoaded = false; //ограничение по колву загрузок
+  const maxItems = 8;
+  const limitUrls = urls.slice(0, maxItems);
+
+  toggleBtn.addEventListener("click", async () => {
     const isVisible = list.style.display === "flex";
     list.style.display = isVisible ? "none" : "flex";
-    
+
     accordion.classList.toggle("open");
+    header.classList.toggle("open-head");
+
+    if (!isLoaded) {
+      try {
+        const responses = await Promise.all(
+          limitUrls.map((url) => fetch(url).then((res) => res.json()))
+        );
+
+        responses.forEach((data) => {
+          const itemAcc = document.createElement("li");
+          itemAcc.textContent = data.result.properties.name || "Без имени";
+          itemAcc.classList.add("item-acc");
+          list.appendChild(itemAcc);
+        });
+      } catch (error) {
+        console.error("Ошибка загрузки данных:", error);
+        const errorItem = document.createElement("li");
+        errorItem.textContent = "Ошибка загрузки";
+        list.appendChild(errorItem);
+      }
+    }
   });
-
   header.append(heading, toggleBtn);
-  accordion.append(header, list);
-
-  try {
-    const responses = await Promise.all(
-      urls.map((url) => fetch(url).then((res) => res.json()))
-    );
-
-    responses.forEach((data) => {
-      const itemAcc = document.createElement("li");
-      itemAcc.textContent = data.result.properties.name || "Без имени";
-      itemAcc.classList.add('item-acc')
-      list.appendChild(itemAcc);
-    });
-  } catch (error) {
-    console.error("Ошибка загрузки данных:", error);
-    const errorItem = document.createElement("li");
-    errorItem.textContent = "Ошибка загрузки";
-    list.appendChild(errorItem);
-  }
-
   accordion.append(header, list);
   return accordion;
 }
