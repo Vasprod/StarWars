@@ -72,15 +72,24 @@ export async function createAccordions(planetsUrls, speciesUrls) {
   blockAccord.append(planetsAccordion, speciesAccordion);
 
   const btnMain = document.createElement("button");
-  btnMain.textContent = "Home";
   btnMain.classList.add("btn-acc");
+  btnMain.innerHTML = `
+  <svg class="icon-btn-home" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M18.75 19.5L11.25 12L18.75 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11.25 19.5L3.75 12L11.25 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Back</span>
+`;
+
   btnMain.addEventListener("click", () => {
-    window.location.href = `index.html`;
+    window.location.href = "index.html";
   });
 
   blockLay.appendChild(blockAccord);
   blockLay.appendChild(btnMain);
 }
+
+const accordionCache = new Map(); // Кэш в памяти на время сессии
 
 export async function createAccordion(title, urls) {
   const accordion = document.createElement("div");
@@ -96,16 +105,16 @@ export async function createAccordion(title, urls) {
   const toggleBtn = document.createElement("button");
   toggleBtn.classList.add("accordion-toggle");
   toggleBtn.innerHTML = `
-  <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 7L12 17L2 7ZM22 7L18 11L22 7ZM15 14L12 17L15 14Z" fill="white" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
+    <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 7L12 17L2 7ZM22 7L18 11L22 7ZM15 14L12 17L15 14Z" fill="white" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   `;
 
   const list = document.createElement("ul");
   list.classList.add("accordion-list");
   list.style.display = "none";
 
-  let isLoaded = false; //ограничение по колву загрузок
+  let isLoaded = false;
   const maxItems = 8;
   const limitUrls = urls.slice(0, maxItems);
 
@@ -118,9 +127,19 @@ export async function createAccordion(title, urls) {
 
     if (!isLoaded) {
       try {
-        const responses = await Promise.all(
-          limitUrls.map((url) => fetch(url).then((res) => res.json()))
-        );
+        const responses = [];
+
+        for (const url of limitUrls) {
+          if (accordionCache.has(url)) {
+            responses.push(accordionCache.get(url));
+          } else {
+            const res = await fetch(url);
+            const json = await res.json();
+            accordionCache.set(url, json);
+            responses.push(json);
+            await delay(300); // задержка 300мс между запросами
+          }
+        }
 
         responses.forEach((data) => {
           const itemAcc = document.createElement("li");
@@ -128,6 +147,8 @@ export async function createAccordion(title, urls) {
           itemAcc.classList.add("item-acc");
           list.appendChild(itemAcc);
         });
+
+        isLoaded = true;
       } catch (error) {
         console.error("Ошибка загрузки данных:", error);
         const errorItem = document.createElement("li");
@@ -136,7 +157,12 @@ export async function createAccordion(title, urls) {
       }
     }
   });
+
   header.append(heading, toggleBtn);
   accordion.append(header, list);
   return accordion;
+}
+
+  function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

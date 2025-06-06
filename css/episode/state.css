@@ -1,3 +1,21 @@
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
 .btn-acc:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #ff9100, #c94a00,#a30000, #ff0000);
@@ -30,16 +48,10 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #111;
+    background: #292929;
     left: 0;
     top: 0;
     border-radius: 25px;
-}
-
-@keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
 }
 
 .accordion-list::-webkit-scrollbar {
@@ -64,6 +76,35 @@
   transition: all 0.5s;
 }
 
-.accordion:hover {
-  transform: scale(1.1);
+.accordion-header,
+.accordion-list {
+  transition: background-color 0.3s;
+}
+
+.accordion:hover .accordion-header,
+.accordion:hover .accordion-list {
+  background-color: #3d3d3d;
+}
+
+.accordion-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(27, 27, 27);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s ease; /* плавное появление */
+}
+
+.open-head::after {
+  transform: translateX(-50%) scaleX(1);
+  transition: transform 0.8s ease; /* плавное раскрытие */
+}
+
+.accordion-header:not(.open-head)::after {
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.05s ease-out; 
 }
