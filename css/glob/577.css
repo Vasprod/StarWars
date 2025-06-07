@@ -11,7 +11,7 @@
 
   .logo_descr {
     width: 70%;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
   }
 
@@ -40,7 +40,7 @@
   .back_card {
     width: 50%;
     border-radius: 20px;
-    padding: 24px;
+    padding: 20px;
   }
 
   .card_title {
@@ -57,8 +57,9 @@
   }
 
   .btn {
+    padding: 5px;
     width: 100%;
-    font-weight: 500;
+    font-weight: 400;
     border-radius: var(--default-radius);
 }
 }
