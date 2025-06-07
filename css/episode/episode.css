@@ -45,6 +45,13 @@ html {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'BrunoAce';
+  src: url(../../fonts/BrunoAce-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --default-color: #FFFFFF;
   --back-color: #000000;

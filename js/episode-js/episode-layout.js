@@ -120,11 +120,18 @@ export async function createAccordion(title, urls) {
 
   toggleBtn.addEventListener("click", async () => {
     const isVisible = list.style.display === "flex";
-    list.style.display = isVisible ? "none" : "flex";
 
-    accordion.classList.toggle("open");
-    header.classList.toggle("open-head");
-    list.classList.toggle('open')
+    if (isVisible) {
+      list.style.display = "none";
+      accordion.classList.remove("open");
+      header.classList.remove("open-head");
+      list.classList.remove("open");
+    } else {
+      list.style.display = "flex";
+      accordion.classList.add("open");
+      header.classList.add("open-head");
+      list.classList.add("open");
+    }
 
     if (!isLoaded) {
       try {
@@ -164,6 +171,6 @@ export async function createAccordion(title, urls) {
   return accordion;
 }
 
-  function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

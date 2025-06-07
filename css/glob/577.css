@@ -4,17 +4,19 @@
   }
 
   .logo {
-    width: 40%;
+    width: 70%;
     height: 15%;
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
 
   .logo_descr {
+    width: 70%;
     font-size: 18px;
     font-weight: 500;
   }
 
   .title_info {
+    padding: 10px 30px;
     font-size: 40px;
     margin-bottom: 10px;
   }
