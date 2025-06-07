@@ -10,44 +10,44 @@ html {
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Roman.otf') format('opentype');
+  src: url('../../fonts/HelveticaNeue-Roman.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Bold.otf') format('opentype');
+  src: url('../../fonts/HelveticaNeue-Bold.otf') format('opentype');
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Light.otf') format('opentype');
+  src: url('../../fonts/HelveticaNeue-Light.otf') format('opentype');
   font-weight: 300;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Medium.otf') format('opentype');
+  src: url('../../fonts/HelveticaNeue-Medium.otf') format('opentype');
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Thin.otf') format('opentype');
+  src: url('../../fonts/HelveticaNeue-Thin.otf') format('opentype');
   font-weight: 100;
 }
 
 @font-face {
   font-family: 'SFDistantGalaxy';
-  src: url('/fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
+  src: url('../../fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'BrunoAce';
-  src: url('/fonts/BrunoAce-Regular.ttf') format('truetype');
+  src: url('../../fonts/BrunoAce-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
