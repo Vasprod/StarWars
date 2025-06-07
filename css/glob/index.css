@@ -40,7 +40,7 @@ html {
 
 @font-face {
   font-family: 'SFDistantGalaxy';
-  src: url('/StarWarsCatalog/fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
+  src: url('../../fonts/SfDistantGalaxy-0l3d.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
