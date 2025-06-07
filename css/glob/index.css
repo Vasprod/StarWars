@@ -10,37 +10,37 @@ html {
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Roman.otf') format('opentype');
+  src: url('./fonts/HelveticaNeue-Roman.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Bold.otf') format('opentype');
+  src: url('./fonts/HelveticaNeue-Bold.otf') format('opentype');
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Light.otf') format('opentype');
+  src: url('./fonts/HelveticaNeue-Light.otf') format('opentype');
   font-weight: 300;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Medium.otf') format('opentype');
+  src: url('./fonts/HelveticaNeue-Medium.otf') format('opentype');
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Thin.otf') format('opentype');
+  src: url('./fonts/HelveticaNeue-Thin.otf') format('opentype');
   font-weight: 100;
 }
 
 @font-face {
   font-family: 'SFDistantGalaxy';
-  src: url('/fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
+  src: url('./fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -91,7 +91,7 @@ button {
     width: 100%;
     height: 100dvh;
     margin-bottom: 80px;
-    background-image: url(/img/image\ 244.jpg);
+    background-image: url(./img/image\ 244.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -103,7 +103,7 @@ button {
 .logo {
     width: 40%;
     height: 40%;
-    background-image: url(/img/logo.svg);
+    background-image: url(./img/logo.svg);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -148,7 +148,7 @@ button {
   width: 100%;
   min-height: 800px;
   background-image: linear-gradient(to top, rgba(161, 32, 0, 0.6), transparent),
-  url(/img/backinfoblock.png);
+  url(./img/backinfoblock.png);
   background-repeat: repeat;
   background-size: 100% 100%;
   background-position: top;
