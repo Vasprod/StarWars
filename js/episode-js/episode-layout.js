@@ -124,6 +124,7 @@ export async function createAccordion(title, urls) {
 
     accordion.classList.toggle("open");
     header.classList.toggle("open-head");
+    list.classList.toggle('open')
 
     if (!isLoaded) {
       try {

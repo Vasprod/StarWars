@@ -1,0 +1,11 @@
+@media (hover: none) and (pointer: coarse) {
+  .btn-acc:before {
+    opacity: 1 !important;
+  }
+
+  .accordion:hover .accordion-header,
+  .accordion:hover .accordion-list {
+    background-color: var(--accord-color);
+    transition: none;
+  }
+}

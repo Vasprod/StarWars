@@ -16,6 +16,68 @@
     100% { background-position: 0 0; }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .accordion:hover .accordion-header,
+  .accordion:hover .accordion-list {
+    background-color: #3d3d3d;
+  }
+}
+
+.accordion .open-head,
+.accordion .open-head + .accordion-list {
+  background-color: #3d3d3d;
+}
+
+.accordion-list::-webkit-scrollbar {
+  width: 6px; 
+}
+
+.accordion-list::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.accordion-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.068); 
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.accordion-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.137); 
+}
+
+.accordion {
+  transition: all 0.5s;
+}
+
+.accordion-header,
+.accordion-list {
+  transition: background-color 0.3s;
+}
+
+.accordion-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(27, 27, 27);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s ease; /* плавное появление */
+}
+
+.open-head::after {
+  transform: translateX(-50%) scaleX(1);
+  transition: transform 1s ease; /* плавное раскрытие */
+}
+
+.accordion-header:not(.open-head)::after {
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.05s ease-out; 
+}
+
 .btn-acc:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #ff9100, #c94a00,#a30000, #ff0000);
@@ -54,57 +116,3 @@
     border-radius: 25px;
 }
 
-.accordion-list::-webkit-scrollbar {
-  width: 6px; 
-}
-
-.accordion-list::-webkit-scrollbar-track {
-  background: transparent; 
-}
-
-.accordion-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.068); 
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.accordion-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.137); 
-}
-
-.accordion {
-  transition: all 0.5s;
-}
-
-.accordion-header,
-.accordion-list {
-  transition: background-color 0.3s;
-}
-
-.accordion:hover .accordion-header,
-.accordion:hover .accordion-list {
-  background-color: #3d3d3d;
-}
-
-.accordion-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 100%;
-  height: 2px;
-  background-color: rgb(27, 27, 27);
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  transition: transform 0.4s ease; /* плавное появление */
-}
-
-.open-head::after {
-  transform: translateX(-50%) scaleX(1);
-  transition: transform 0.8s ease; /* плавное раскрытие */
-}
-
-.accordion-header:not(.open-head)::after {
-  transform: translateX(-50%) scaleX(0);
-  transition: transform 0.05s ease-out; 
-}

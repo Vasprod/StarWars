@@ -40,14 +40,7 @@ html {
 
 @font-face {
   font-family: 'SFDistantGalaxy';
-  src: url('../../fonts/SFDistantGalaxy-0l3d.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'BrunoAce';
-  src: url('../../fonts/BrunoAce-Regular.ttf') format('truetype');
+  src: url('../../fonts/SfDistantGalaxy-0l3d.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -224,7 +217,7 @@ button {
 
 .btn-acc {
   margin-top: auto;
-  padding: 12px 32px;
+  padding: 10px 24px;
   font-family: 'BrunoAce';
   font-size: 32px;
   font-weight: 500;
