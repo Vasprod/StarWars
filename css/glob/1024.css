@@ -1,0 +1,54 @@
+@media (min-width: 1024px) and (max-width: 1460px) {
+  .container {
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    width: 40%;
+    height: 26%;
+    margin-bottom: 0;
+  }
+
+  .logo_descr {
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  .title_info {
+    font-size: 60px;
+    margin-bottom: 30px;
+  }
+
+  .block_card {
+    width: 90%;
+    gap: 26px;
+    padding: 26px;
+    margin-bottom: 32px;
+  }
+  .card {
+    flex: 1 1 calc(50% - 26px);
+    border-radius: 20px;
+  }
+
+  .back_card_img {
+    border-radius: 20px;
+  }
+
+  .back_card {
+    border-radius: 20px;
+    padding: 30px;
+  }
+
+  .card_title {
+    font-size: 16px;
+  }
+
+  .card_descr {
+    font-size: 14px;
+  }
+
+  .container_info {
+    background-repeat: repeat;
+    background-size: contain;
+  }
+}

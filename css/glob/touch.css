@@ -1,0 +1,10 @@
+@media (hover: none) and (pointer: coarse) {
+  .card:hover .back_card_img {
+    width: auto;
+    transition: none;
+  }
+
+  .btn:before {
+    opacity: 1 !important; 
+  }
+}

@@ -39,6 +39,6 @@ function renderFilms(films) {
 
 loadFilms();
 
-document.addEventListener("DOMContentLoaded", () => {
-  generateSparks();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   generateSparks();
+// });
