@@ -1,0 +1,65 @@
+@media (min-width: 320px) and (max-width: 768px) {
+    .back-container {
+    padding: 50px 50px;
+    height: 100%;
+}
+   .content {
+    width: 100%;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .block-film {
+    gap: 24px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 36px;
+  }
+
+  .list {
+    display: none;
+  }
+
+  .p-film {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 130%;
+    text-shadow: 4px 4px 15px rgb(0, 0, 0);
+  }
+
+  .block-acc {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .accordion {
+    width: 100%;
+}
+
+  .accordion-header {
+    gap: 14px;
+    padding: 12px 20px;
+  }
+
+  .title-acc,
+  .accordion-toggle {
+    font-size: 22px;
+  }
+
+  .accordion-list {
+    gap: 8px;
+    padding: 20px;
+    max-height: 200px;
+}
+
+.item-acc {
+    font-size: 16px;
+}
+
+  .btn-acc {
+    align-items: center;
+    font-size: 24px;
+  }
+}
