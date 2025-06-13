@@ -1,10 +1,27 @@
 @media (hover: none) and (pointer: coarse) {
-  .card:hover .back_card_img {
-    width: auto;
-    transition: none;
+  /* Убираем hover-анимации у кнопок */
+  .btn:hover:before {
+    opacity: 0 !important;
   }
 
-  .btn:before {
-    opacity: 1 !important; 
+  /* Убираем масштаб или трансформации на карточках */
+  .card:hover .back_card_img {
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Убираем любые подсветки, если есть */
+  .btn:before,
+  .btn:after {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Можно сделать мягкий вид без миганий */
+  .btn {
+    background-color: #222 !important;
+    color: #fff !important;
   }
 }
